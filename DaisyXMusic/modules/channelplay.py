@@ -334,8 +334,7 @@ async def m_cb(b, cb):
             queues.task_done(chet_id)
 
             if queues.is_empty(chet_id):
-                await callsmusic.stop(chet_id)
-
+                callsmusic.stop(chet_id)
                 await cb.message.edit("- No More Playlist..\n- Leaving VC!")
             else:
                 await callsmusic.set_stream(
@@ -364,7 +363,7 @@ async def m_cb(b, cb):
 @authorized_users_only
 async def play(_, message: Message):
     global que
-    lel = await message.reply("🔄 **Processing**")
+    lel = await message.reply("🔄 <b>Processing</b>")
 
     try:
       conchat = await _.get_chat(message.chat.id)
@@ -429,7 +428,7 @@ async def play(_, message: Message):
     message.from_user.id
     text_links = None
     message.from_user.first_name
-    await lel.edit("🔎 **Finding**")
+    await lel.edit("🔎 <b>Finding</b>")
     message.from_user.id
     user_id = message.from_user.id
     message.from_user.first_name
@@ -599,7 +598,7 @@ async def play(_, message: Message):
         qeue.append(appendable)
         await message.reply_photo(
             photo="final.png",
-            caption=f"#⃣ Your requested song **queued** at position {position}!",
+            caption=f"#⃣ Your requested song <b>queued</b> at position {position}!",
             reply_markup=keyboard,
         )
         os.remove("final.png")
@@ -617,7 +616,7 @@ async def play(_, message: Message):
         await message.reply_photo(
             photo="final.png",
             reply_markup=keyboard,
-            caption="▶️ **Playing** the song requested by {} via Youtube Music in Linked Channel".format(
+            caption="▶️ <b>Playing</b> the song requested by {} via Youtube Music 😎 in Linked Channel".format(
                 message.from_user.mention()
             ),
         )
@@ -629,7 +628,7 @@ async def play(_, message: Message):
 @authorized_users_only
 async def deezer(client: Client, message_: Message):
     global que
-    lel = await message_.reply("🔄 **Processing**")
+    lel = await message_.reply("🔄 <b>Processing</b>")
 
     try:
       conchat = await client.get_chat(message_.chat.id)
@@ -696,7 +695,7 @@ async def deezer(client: Client, message_: Message):
     queryy = text[1]
     query=queryy
     res = lel
-    await res.edit(f"Searching 👀👀👀 for `{queryy}` on deezer")
+    await res.edit(f"Searching 🔍 for `{queryy}` on deezer")
     try:
         songs = await arq.deezer(query,1)
         if not songs.ok:
@@ -745,7 +744,6 @@ async def deezer(client: Client, message_: Message):
         appendable = [s_name, r_by, loc]
         qeue.append(appendable)
     await callsmusic.set_stream(chat_id, file_path)
-
     await res.delete()
 
     m = await client.send_photo(
