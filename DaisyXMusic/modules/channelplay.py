@@ -81,13 +81,13 @@ async def playlist(client, message):
         temp.append(t)
     now_playing = temp[0][0]
     by = temp[0][1].mention(style="md")
-    msg = "**Now Playing** in {}".format(lel.linked_chat.title)
+    msg = "<b>Now Playing</b> in {}".format(lel.linked_chat.title)
     msg += "\n- " + now_playing
     msg += "\n- Req by " + by
     temp.pop(0)
     if temp:
         msg += "\n\n"
-        msg += "**Queue**"
+        msg += "<b>Queue</b>"
         for song in temp:
             name = song[0]
             usr = song[1].mention(style="md")
@@ -340,7 +340,7 @@ async def m_cb(b, cb):
                 await callsmusic.set_stream(
                     chet_id, queues.get(chet_id)["file"]
                 )
-                await cb.answer("Skipped")
+                await cb.answer.reply_text("✅ <b>Skipped</b>")
                 await cb.message.edit((m_chat, qeue), reply_markup=r_ply(the_data))
                 await cb.message.reply_text(
                     f"- Skipped track\n- Now Playing **{qeue[0][0]}**"
