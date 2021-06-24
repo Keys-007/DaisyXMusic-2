@@ -1,7 +1,7 @@
 from pyrogram import Client
 from pyrogram.types import ChatMemberUpdated
 
-from DaisyXMusic.function import admins
+from DaisyXMusic.helpers import admins
 
 
 @Client.on_chat_member_updated()
