@@ -15,15 +15,16 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from asyncio.queues import QueueEmpty
-from DaisyXMusic.config import que
+from asyncio import QueueEmpty
 from pyrogram import Client
 from pyrogram import filters
 from pyrogram.types import Message
 
+from DaisyXMusic.config import que
 from DaisyXMusic.function.admins import set
 from DaisyXMusic.helpers.channelmusic import get_chat_id
-from DaisyXMusic.helpers.decorators import authorized_users_only, errors
+from DaisyXMusic.helpers.decorators import authorized_users_only
+from DaisyXMusic.helpers.decorators import errors
 from DaisyXMusic.helpers.filters import command 
 from DaisyXMusic.helpers.filters import other_filters
 from DaisyXMusic.services.callsmusic import callsmusic
