@@ -514,17 +514,31 @@ async def play(_, message: Message):
         return
     text_links=None
     await lel.edit("🔎 <b>Finding</b>")
-    if message.reply_to_message:
+    else:
         entities = []
-        toxt = message.reply_to_message.text or message.reply_to_message.caption
-        if message.reply_to_message.entities:
-            entities = message.reply_to_message.entities + entities
-        elif message.reply_to_message.caption_entities:
-            entities = message.reply_to_message.entities + entities
+        if message.entities:
+            entities += entities
+        elif message.caption_entities:
+            entities += message.caption_entities
+            toxt = message.reply_to_message.text \
+                  or message.reply_to_message.caption
+            if message.reply_to_message.entities:
+               entities = message.reply_to_message.entities + entities
+            elif message.reply_to_message.caption_entities:
+                entities = message.reply_to_message.entities + entities
+        else:
+            toxt = message.text or message.caption    
+        
         urls = [entity for entity in entities if entity.type == 'url']
         text_links = [
             entity for entity in entities if entity.type == 'text_link'
         ]
+        
+        if urls:
+            url = text[urls[0].offset:urls[0].offset + urls[0].length]
+        elif text_links:
+            url = text_links[0].url
+    
     else:
         urls=None
     if text_links:
@@ -1293,5 +1307,4 @@ async def lol_cb(b, cb):
             reply_markup=keyboard,
             caption=f"▶️ <b>Playing</b> here the song requested by {r_by.mention} via Youtube Music 😎",
         )
-        
         os.remove("final.png")
